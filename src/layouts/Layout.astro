@@ -1,0 +1,64 @@
+---
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+
+import { ViewTransitions } from 'astro:transitions';
+interface Props {
+  title: string;
+  heading: string;
+}
+
+const { title, heading } = Astro.props;
+const items = {
+  Whois: "/",
+  Pills: "/pills",
+  Learn: "/learning",
+  Proyects: "/profolio",
+  Blog: "/journal",
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+		<ViewTransitions />
+  </head>
+  <body class="text-sm">
+    <header
+      class="fixed top-0 w-full flex items-center justify-center p-4 uppercase font-medium"
+      <h2
+    >
+      {heading}
+    </header>
+    <main class="border h-screen flex items-center justify-center relative">
+      <div class="uppercase fixed flex gap-1 items-center font-medium">
+        <span>(R)</span>
+        <h1>Royer <span class="text-neutral-400">Guerrero</span></h1>
+      </div>
+      <div class="h-[85vh] w-[60vh] flex items-center">
+        <slot />
+      </div>
+    </main>
+    <footer
+      class="fixed bottom-0 w-full flex items-center justify-center p-4 uppercase"
+    >
+      <nav>
+        <ul class="flex gap-5 font-medium">
+          {
+            Object.entries(items).map(([key, value]) => (
+              <li>
+                <a href={value}>{key}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
